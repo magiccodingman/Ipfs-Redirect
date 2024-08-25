@@ -32,8 +32,7 @@ The main page includes:
 ### Redirect Creator
 
 Creating a redirect link is easy:
-1. Navigate to the **Redirect Helper** from the menu or directly via:
-   - [IPFS Link (Slow - Doesn't always work)](https://ipfs.io/ipfs/QmdHnUw7Hp4ByHCYqGN44SBTP6nYviXiftWAk9Qzni8Nhe/?page=redirect_helper)
+1. Navigate to the **Redirect Helper** from the menu.
 2. Enter your IPFS CID in the text box.
 3. Click **Generate Link**.
 
