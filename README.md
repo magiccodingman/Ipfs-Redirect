@@ -1,4 +1,54 @@
 # Ipfs-Redirect
-I created this a while back and worked with others on some forums where we've been testing and playing with this before posting anything openly about it. 
 
-When using IPFS, one of the major issues associated with it is the lack of adoption (obviously). But when you use IPFS, you know it's actually very fast when using it directly!
+Create your own IPFS redirect link to help others easily access your IPFS site!
+
+## Introduction
+
+IPFS is a powerful tool for decentralized web hosting, but its adoption has been slow due to accessibility challenges. This project aims to simplify the process of sharing IPFS links by creating an easy-to-use redirect system.
+
+I've been working on this with others in various forums, testing and refining it before making it publicly available. The project includes a small, 26 KB HTML file that acts as a redirect link and a helpful wiki on IPFS usage.
+
+You can access the project via IPFS:
+- [IPFS Link](https://ipfs.io/ipfs/QmdHnUw7Hp4ByHCYqGN44SBTP6nYviXiftWAk9Qzni8Nhe)
+- [Web3 Domain](https://ipfs-redirect.unstoppable/)
+- CID: `QmaPPSJo7L1GvFCeu4BACgBnPQhZQW8GZchy2EHWUGcBVM`
+
+## Why This Project?
+
+While IPFS is fast when accessed directly, sharing IPFS sites with others can be challenging. This project provides a solution by offering a redirect link that either sends users directly to the site or guides them through setting up IPFS if needed.
+
+## Features
+
+### Wiki Capabilities
+
+The main page includes:
+- An introduction to IPFS.
+- A simple wiki with guides on using and setting up IPFS.
+- Best practices for supporting IPFS projects while managing bandwidth.
+
+### Redirect Creator
+
+Creating a redirect link is easy:
+1. Navigate to the **Redirect Helper** from the menu or directly via:
+   - [IPFS Link (Slow - Doesn't always work)](https://ipfs.io/ipfs/QmdHnUw7Hp4ByHCYqGN44SBTP6nYviXiftWAk9Qzni8Nhe/?page=redirect_helper)
+2. Enter your IPFS CID in the text box.
+3. Click **Generate Link**.
+
+This will create a custom redirect URL that integrates your CID.
+
+### How the Redirect Link Works
+
+The generated redirect link is connected to the original CID and customizes the instructions provided to the user. The goal is to be informative without being intrusive.
+
+Key features:
+- A **Continue to Site** button that follows the user across pages.
+- Automatic wrapping of the CID in an HTTPS gateway if the user hasn't set up IPFS.
+- Gateway redundancy to ensure reliability.
+
+## Supporting the Project
+
+Note that the site may load slowly due to limited hosting. Please consider supporting the project by pinning the CID on your IPFS node to improve speed and reliability.
+
+## Conclusion
+
+This project was a fun and small experiment aimed at making IPFS more accessible. It’s not perfect, but it’s a step toward simplifying decentralized web access. If you find it useful, please consider pinning the CID and spreading the word.
