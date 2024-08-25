@@ -9,9 +9,9 @@ IPFS is a powerful tool for decentralized web hosting, but its adoption has been
 I've been working on this with others in various forums, testing and refining it before making it publicly available. The project includes a small, 26 KB HTML file that acts as a redirect link and a helpful wiki on IPFS usage.
 
 You can access the project via IPFS:
-- [IPFS Link](https://ipfs.io/ipfs/QmdHnUw7Hp4ByHCYqGN44SBTP6nYviXiftWAk9Qzni8Nhe)
+- [IPFS Link](https://ipfs.io/ipfs/QmPx5dg7ka5dYL1ehqunC5KLar5bcY4EDAcrXTyB54uDu8)
 - [Web3 Domain](https://ipfs-redirect.unstoppable/)
-- CID: `QmdHnUw7Hp4ByHCYqGN44SBTP6nYviXiftWAk9Qzni8Nhe`
+- CID: `QmPx5dg7ka5dYL1ehqunC5KLar5bcY4EDAcrXTyB54uDu8`
 
 **IMPORTANT NOTE***:
 Please always reference the Web3 domain created to see what the latest link and CID is. I'll update it over time to any new version. And if you choose to support the project, it'd incredibly appreciated if you keep track of the changes occassionally and pin the newest. Thank you!
