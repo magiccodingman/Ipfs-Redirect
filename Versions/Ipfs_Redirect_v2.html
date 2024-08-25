@@ -189,9 +189,23 @@ async function getBrowserName() {
             }
         }
 
+function extractCID(url) {
+    const ipfsPattern = /ipfs\/([^\/\?\#\.\:\;\&]*)/i; // Regex to capture CID after "ipfs/"
+    const nonIpfsPattern = /https?:\/\/([^\/\?\#\.\:\;\&]*)/i; // Regex to capture CID after "http://" or "https://"
 
+    let cid = '';
 
-        function generateRedirectLink() {
+    // Check if the URL contains "ipfs/"
+    if (ipfsPattern.test(url)) {
+        cid = url.match(ipfsPattern)[1]; // Extract the CID
+    } else if (nonIpfsPattern.test(url)) { // Handle scenario without "ipfs/"
+        cid = url.match(nonIpfsPattern)[1]; // Extract the CID
+    }
+
+    return cid;
+}
+
+async function generateRedirectLink() {
     let userUrl = document.getElementById('urlInput').value;
     if (!userUrl) {
         alert('Please enter a URL to redirect to.');
@@ -208,11 +222,45 @@ async function getBrowserName() {
     let autoAdaptParam = document.getElementById('autoadaptlink').checked ? '1' : '0';
     let requiresOriginParam = document.getElementById('requiresorigin').checked ? '1' : '0';
 
-    let redirectLink = `${currentUrl}?redirectURL=${safeUrl}&autoadapt=${autoAdaptParam}&requiresorigin=${requiresOriginParam}`;
+
+// Define gateways
+    const gateways = [
+        { url: 'https://ipfs.io/ipfs/', supportsOrigin: false },
+        { url: 'https://dweb.link/ipfs/', supportsOrigin: true },
+        { url: 'https://4everland.io/ipfs/', supportsOrigin: true },
+        { url: 'https://w3s.link/ipfs/', supportsOrigin: true }
+    ];
+
+let gatewayUrl = null;
+    for (const gateway of gateways) {
+        if (!requiresOriginParam || gateway.supportsOrigin) {
+            try {
+                console.log(`Checking gateway: ${gateway.url}`);
+                await fetch(gateway.url, { mode: 'no-cors' });
+                console.log(`${gateway.url} - available`);
+                gatewayUrl = gateway.url;
+                break; // Exit loop once a responsive gateway is found
+            } catch (error) {
+                console.log(`${gateway.url} - not available`);
+            }
+        }
+    }
+
+    if (!gatewayUrl) {
+        gatewayUrl = 'https://ipfs.io/ipfs/';
+    }
+
+
+    let redirectLink = `${gatewayUrl}${extractCID(currentUrl)}?redirectURL=${safeUrl}&autoadapt=${autoAdaptParam}&requiresorigin=${requiresOriginParam}`;
 
     document.getElementById('output').innerText = redirectLink;
     document.getElementById('copyButton').style.display = 'inline-block';
 }
+
+
+
+
+
 
 function copyToClipboard() {
     let output = document.getElementById('output').innerText;
@@ -265,12 +313,14 @@ async function SetRedirectUrls(redirectURL) {
 
         console.log('The following error/s is to be expected. HTTP calls are simply verifying the links are still live.');
         console.log(`Requires origin: ${requiresOrigin}`);
+		var gateChosen = false;
         for (const gateway of gateways) {
             if (!requiresOrigin || gateway.supportsOrigin) {
                 try {
                     await fetch(gateway.url, { mode: 'no-cors' });
                     console.log(`${gateway.url} - available`);
                     modifiedURL = `${gateway.url}${modifiedURL}`;
+					gateChosen = true;
                     break; // Exit loop once a responsive gateway is found
                 } catch (error) {
                     console.log(`${gateway.url} - not available`);
@@ -278,11 +328,13 @@ async function SetRedirectUrls(redirectURL) {
             }
         }
 
-        // If no gateway is responsive, fall back to the original URL with its protocol
-        if (!modifiedURL.startsWith('https://') && !modifiedURL.startsWith('ipfs://')) {
-            console.log('falling back to original redirect');
-            modifiedURL = redirectURL;
-        }
+if (gateChosen === false) {
+   if (redirectURL.startsWith("/")) {
+        modifiedURL = 'https://ipfs.io/ipfs' + redirectURL; // Concatenate without adding an extra slash
+    } else {
+        modifiedURL = 'https://ipfs.io/ipfs/' + redirectURL; // Concatenate with the slash
+    }
+}
     
 
     console.log(`Redirect Link Set To: ${modifiedURL}`);
