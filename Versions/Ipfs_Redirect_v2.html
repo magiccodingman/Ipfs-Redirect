@@ -461,42 +461,9 @@ if (gateChosen === false) {
 		<h2>Step 1:</h3>
 			<a class="button" href="https://docs.ipfs.tech/install/ipfs-desktop/" target="_blank">Download IPFS App</a><b> (Required)</b>
 		</div>
-        <div class="mt-6 mb-12">
-			<h2>Step 2: (Recommended) Optimize IPFS Performance with Bandwidth Limiter</h2>
-			<p>By default, IPFS can consume a lot of your bandwidth, which can be a big problem for users with internet data caps or limited upload bandwidth. This prevents data usage issues or bandwidth throttling. (It's mostly an issue for upload bandwidth)</p>
+         <div class="mt-6 mb-12">
+			<h2>Step 2: (Optional)</h2>			
 		</div>
-		
-		<div class="mt-6 mb-12">
-		<div class="calculator">
-				<h3>Bandwidth Calculator</h2>
-				<p></p>
-				<p>By default, the instructions below is set to 256 KB/s limit on the bandwitch limiter app. This means IPFS will eat 632.82 GB maximum of data within 30 days, which is roughly a 2 mbps upload cap constantly. But if you have stricter data cap limits or really low upload bandwidth, you can adjust the calulator to set the data you're willing to have IPFS use each month.</p>
-				<p><i>Note: The calculator also changes the instructions to match your preference.</i></p>
-				<label for="gbPerMonth">GB/month:</label>
-				<input type="number" id="gbPerMonth" value="632.82" onchange="calculateBandwidth()"><br>
-				<p><b>Suggested KB/s limit:</b> <span id="kbpsDisplay">256.00</span></p>
-			</div>
-		</div>
-		<div class="mt-6 mb-12">
-			<h3>For Windows Users:</h3>
-			<a class="button" href="https://www.netlimiter.com/download" target="_blank">Download Net Limiter App</a>
-			<p>Once you downloaded with IPFS running in the background:</p>
-			<ol style="margin-top:0px;">
-				<li>Open the app and find "ipfs.exe" under the Activities tab (this should be the default view).</li>
-				<li>Right-click on "ipfs.exe" and select "Add Rule".</li>
-				<li>Set the rule type to "Limit" and the direction to "out" (we only need to limit the upload bandwidth).</li>
-				<li>Set the value to <span id="windowsLimit">256</span> KB/s (this is kilobytes per second, which equates to 2 megabits per second).</li>
-			</ul>
-		</div>
-		<div class="mt-6 mb-12">
-			<h3>For Linux Users:</h3>
-    <p>Install Trickle with the following command:</p>
-    <pre><code>sudo apt install trickle</code></pre>
-    <p>Then use this command to limit IPFS bandwidth:</p>
-    <pre><code id="linuxLimit">trickle -u 256 -d 12800 ipfs daemon</code></pre>
-			
-			
-        </div>
 		<div class="mt-6 mb-12">
 			<h3>Port Forwarding</h2>
 			<p>Most users won't need to unless they're experiencing extremely slow IPFS speeds or errors. If you are experiencing issues, please refer to the official <a href="https://docs.ipfs.tech/how-to/nat-configuration/#configuration-options" target="_blank">Port Forwarding Guide</a>.</p>
