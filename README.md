@@ -10,6 +10,7 @@ I've been working on this with others in various forums, testing and refining it
 
 You can access the project via IPFS:
 - [Web3 Domain](https://ipfs-redirect.unstoppable/)
+- [Web3 Domain Alternative](https://ipfsredirect.unstoppable/)
 
 **IMPORTANT NOTE***:
 Please always reference the Web3 domain created to see what the latest link and CID is. I'll update it over time to any new version. And if you choose to support the project, it'd incredibly appreciated if you keep track of the changes occassionally and pin the newest. Thank you!
