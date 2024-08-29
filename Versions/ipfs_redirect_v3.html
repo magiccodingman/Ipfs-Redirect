@@ -325,6 +325,24 @@ function copyToClipboard() {
 ];
 
 async function SetRedirectUrls(redirectURL) {
+
+    if (isWeb3Domain === true) {
+	 let web3URL = '';
+        // Check if the redirectURL starts with "http", "https", or "/"
+        if (redirectURL.startsWith('http') || redirectURL.startsWith('https') || redirectURL.startsWith('/')) {
+            web3URL = redirectURL;
+        } else {
+            // If not, prepend "http://"
+            web3URL = 'http://' + redirectURL;
+        }
+		console.log(`Redirect Link Set To: ${web3URL}`);
+    document.getElementById('redirectLink').href = web3URL;
+    document.getElementById('floatingRedirectButton').href = web3URL;
+	return;
+    }
+    
+
+
     if (!autoAdaptLink) {
         document.getElementById('redirectLink').href = redirectURL;
         document.getElementById('floatingRedirectButton').href = redirectURL;
