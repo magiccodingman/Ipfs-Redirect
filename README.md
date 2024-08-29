@@ -12,7 +12,9 @@ You can access the project via IPFS:
 - [Web3 Domain](https://ipfs-redirect.unstoppable/)
 - [Web3 Domain Alternative](https://ipfsredirect.unstoppable/)
 
-The officially posted versions to the domain names. I do try to minify them before publishing. Which usually cuts roughly 30% off the size.
+The officially posted versions to the web3 domains. I do try to minify them before publishing. Which usually cuts roughly 30% off the size.
+
+Additionally, when redirecting to web3 domains instead of a CID. The user will get a different screen if they use the link on any browser that's not Brave browser.
 
 **IMPORTANT NOTE***:
 Please always reference the Web3 domain created to see what the latest link and CID is. I'll update it over time to any new version. And if you choose to support the project, it'd incredibly appreciated if you keep track of the changes occassionally and pin the newest. Thank you!
