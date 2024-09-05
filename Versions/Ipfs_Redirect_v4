@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta version="3">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to IPFS</title>
+    <style>
+        body {
+            font-family: 'Roboto', 'Helvetica', 'Arial', 'sans-serif';
+            margin: 0;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: rgba(66, 66, 66, 1);
+            margin: 0;
+        }
+
+        h1 {
+            line-height: 1.167;
+            letter-spacing: 0;
+        }
+
+        p,
+        b,
+        input {
+            line-height: 1.6;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            border: 1px solid rgba(255, 255, 255, 1);
+            border-radius: 8px;
+            margin-top: 100px;
+        }
+        a {
+            cursor: pointer;
+        }
+        b {
+            color: #0056b3;
+        }
+
+        code {
+            background-color: #eee;
+            padding: 2px 6px;
+        }
+
+        .menu {
+            background-color: #0056b3;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-weight: bold;
+        }
+
+        .menu a:hover {
+            background-color: #004494;
+        }
+
+        .calculator {
+            margin: 20px 0;
+        }
+
+        .button {
+            background-color: #0056b3;
+            color: white;
+            padding: 6px 16px;
+            margin: 10px 0 20px 0;
+            font-size: .875rem;
+            font-weight: bold;
+            letter-spacing: .02857em;
+            line-height: 1.75;
+            text-decoration: none;
+            text-transform: uppercase;
+            border-radius: 6px;
+            display: inline-block;
+            box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, .2), 0px 2px 2px 0px rgba(0, 0, 0, .14), 0px 1px 5px 0px rgba(0, 0, 0, .12);
+            cursor: pointer;
+            border: none;
+        }
+
+        .button:hover {
+            background-color: #004494;
+        }
+
+        .floating-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            word-wrap: break-word;
+        }
+
+        #copyButton {
+            background-color: #008CBA;
+            color: white;
+            padding: 6px 16px;
+            margin: 10px 0 20px 0;
+            font-size: .875rem;
+            font-weight: bold;
+            letter-spacing: .02857em;
+            line-height: 1.75;
+            text-decoration: none;
+            text-transform: uppercase;
+            border-radius: 6px;
+            display: inline-block;
+            box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, .2), 0px 2px 2px 0px rgba(0, 0, 0, .14), 0px 1px 5px 0px rgba(0, 0, 0, .12);
+            cursor: pointer;
+            border: none;
+        }
+
+        .highlight {
+            background-color: #D7E8FF;
+            /* light blue */
+            padding: 2px 4px;
+            /* Optional: Add padding for better appearance */
+            border-radius: 3px;
+            /* Optional: Add border radius for a smoother look */
+        }
+
+        li::marker {
+            color: #0056b3;
+            font-size: 1.5rem;
+            line-height: 1.75;
+            margin-top: 3px;
+        }
+
+        .mt-6 {
+            margin-top: 24px !important;
+        }
+
+        .mb-6 {
+            margin-bottom: 24px !important;
+        }
+
+        .mb-12 {
+            margin-bottom: 48px !important;
+        }
+
+        .disc {
+            list-style-type: disc !important;
+        }
+
+        .warning {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .info-circle {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background-color: #3498db;
+            border-radius: 50%;
+            color: #fff;
+            text-align: center;
+            line-height: 24px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .popup.active {
+            display: block;
+        }
+
+        .popup h2 {
+            margin-top: 0;
+            color: #3498db;
+        }
+
+        .popup p {
+            margin: 10px 0;
+        }
+
+        .popup .close {
+            display: block;
+            text-align: right;
+            cursor: pointer;
+            color: #3498db;
+            font-size: 16px;
+        }
+
+        .popup .close:hover {
+            text-decoration: underline;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+    </style>
+
+    <script>
+        let autoAdaptLink = true;
+        const autoAdaptLinkDefault = true;
+        let requiresOrigin = false;
+        let isWeb3Domain = false;
+        let ImmediateContinue = false;
+        let MagicLibraryConfirmation = false;
+        function showPage(page) {
+            document.querySelectorAll('.page').forEach(page => page.style.display = 'none');
+            document.getElementById(page).style.display = 'block';
+        }
+
+        function getQueryParams() {
+            const params = {};
+            window.location.search.substr(1).split("&").forEach(pair => {
+                const [key, value] = pair.split("=");
+                params[key] = decodeURIComponent(value);
+            });
+            return params;
+        }
+
+
+
+        function getURLParameter(name) {
+            return new URLSearchParams(window.location.search).get(name);
+        }
+
+        function checkAutoAdaptParameter() {
+            const autoAdaptParam = getURLParameter('autoadapt');
+            if (autoAdaptParam !== null) {
+                autoAdaptLink = autoAdaptParam === '1';
+            } else {
+                autoAdaptLink = autoAdaptLinkDefault;
+            }
+
+            const isWeb3DomainParam = getURLParameter('web3domain');
+            if (isWeb3DomainParam !== null) {
+                isWeb3Domain = isWeb3DomainParam === '1';
+            } else {
+                isWeb3Domain = false; // Default value
+            }
+
+            const isImmediateContinueParam = getURLParameter('immediatecontinue');
+            if (isImmediateContinueParam !== null) {
+                ImmediateContinue = isImmediateContinueParam === '1';
+            } else {
+                ImmediateContinue = false; // Default value
+            }
+
+            const isMagicLibraryConfirmationParam = getURLParameter('magiclibraryconfirmation');
+            if (isImmediateContinueParam !== null) {
+                MagicLibraryConfirmation = isMagicLibraryConfirmationParam === '1';
+            } else {
+                MagicLibraryConfirmation = false; // Default value
+            }
+
+            const requiresOriginParam = getURLParameter('requiresorigin');
+            if (requiresOriginParam !== null) {
+                requiresOrigin = requiresOriginParam === '1';
+            } else {
+                requiresOrigin = false; // Default value
+            }
+        }
+
+        // Function to check if the year is 2028 or greater
+        function isYear2028OrGreater() {
+            const currentYear = new Date().getFullYear();
+            return currentYear >= 2028;
+        }
+
+        let unsupportedBrowser = false;
+        // Function to hide/show sections based on browser and year
+        async function checkBrowserAndYear() {
+            const isWeb3DomainParam = getURLParameter('web3domain');
+            if (isWeb3DomainParam !== null) {
+                isWeb3Domain = isWeb3DomainParam === '1';
+            } else {
+                isWeb3Domain = false; // Default value
+            }
+
+            if (isWeb3Domain === true) {
+                console.log('Web3 domain redirect detected. Requires compatible browser prior to 2028.');
+            }
+            else {
+                console.log('Public gateway can be used. User can use alternative browser.');
+                return;
+            }
+
+            const browserName = await getBrowserName();
+            const unsupportedSection = document.getElementById('unsupportedBrowserSection');
+            const setupSection = document.getElementById('ipfsSetupSection');
+            const extensionSection = document.getElementById('browserExtensionSection');
+
+            if (browserName === 'brave' || isYear2028OrGreater()) {
+                // Brave browser detected or year is 2028 or greater, show everything
+                unsupportedSection.style.display = 'none';
+                setupSection.style.display = 'block';
+                extensionSection.style.display = 'block';
+            } else {
+                // Hide "I've Setup IPFS Extension" and "Use Browser Extension" sections
+                unsupportedSection.style.display = 'block';
+                setupSection.style.display = 'none';
+                extensionSection.style.display = 'none';
+                unsupportedBrowser = true;
+            }
+        }
+
+        // Function to handle "I don't care, let me continue" button click
+        function continueAnyway() {
+            document.getElementById('unsupportedBrowserSection').style.display = 'none';
+            document.getElementById('ipfsSetupSection').style.display = 'block';
+            document.getElementById('browserExtensionSection').style.display = 'block';
+        }
+
+        async function getBrowserName() {
+            // Check for Brave browser
+            if (navigator.brave && await navigator.brave.isBrave()) {
+                return 'brave';
+            }
+
+            // Check for other browsers
+            const userAgent = navigator.userAgent.toLowerCase();
+            if (userAgent.includes('edge')) {
+                return 'edge';
+            } else if (userAgent.includes('edg')) { // Edge (Chromium)
+                return 'edge (chromium)';
+            } else if (userAgent.includes('opr') || userAgent.includes('opera')) {
+                return 'opera';
+            } else if (userAgent.includes('chrome') && !userAgent.includes('chromium')) {
+                return 'chrome';
+            } else if (userAgent.includes('safari')) {
+                return 'safari';
+            } else if (userAgent.includes('firefox')) {
+
+                return 'firefox';
+            } else if (userAgent.includes('trident') || userAgent.includes('msie')) {
+                return 'internet explorer';
+            } else if (userAgent.includes('chromium')) {
+                return 'chromium';
+            } else {
+                return 'other';
+            }
+        }
+
+        function extractCID(url) {
+            const ipfsPattern = /ipfs\/([^\/\?\#\.\:\;\&]*)/i; // Regex to capture CID after "ipfs/"
+            const nonIpfsPattern = /https?:\/\/([^\/\?\#\.\:\;\&]*)/i; // Regex to capture CID after "http://" or "https://"
+
+            let cid = '';
+
+            // Check if the URL contains "ipfs/"
+            if (ipfsPattern.test(url)) {
+                cid = url.match(ipfsPattern)[1]; // Extract the CID
+            } else if (nonIpfsPattern.test(url)) { // Handle scenario without "ipfs/"
+                cid = url.match(nonIpfsPattern)[1]; // Extract the CID
+            }
+
+            return cid;
+        }
+
+        async function generateRedirectLink() {
+            let userUrl = document.getElementById('urlInput').value;
+            if (!userUrl) {
+                alert('Please enter a URL to redirect to.');
+                return;
+            }
+
+            let safeUrl = encodeURIComponent(userUrl);
+            let currentUrl = window.location.origin + window.location.pathname;
+            if (currentUrl.endsWith('/')) {
+                currentUrl = currentUrl.slice(0, -1); // Remove trailing slash
+            }
+
+            // Read the state of the checkboxes directly from the DOM
+            let autoAdaptParam = document.getElementById('autoadaptlink').checked ? '1' : '0';
+            let requiresOriginParam = document.getElementById('requiresorigin').checked ? '1' : '0';
+            let isWeb3DomainParam = document.getElementById('web3Domain').checked ? '1' : '0';
+            let isimmediate = document.getElementById('immediateRedirectContinue').checked ? '1' : '0';
+            let ismagic = document.getElementById('magiclibraryconfirmationcheckbox').checked ? '1' : '0';
+
+            // Define gateways
+            const gateways = [
+                { url: 'https://ipfs.io/ipfs/', supportsOrigin: false },
+                { url: 'https://dweb.link/ipfs/', supportsOrigin: true },
+                { url: 'https://4everland.io/ipfs/', supportsOrigin: true },
+                { url: 'https://w3s.link/ipfs/', supportsOrigin: true },
+                { url: 'https://nftstorage.link/ipfs/', supportsOrigin: true }
+
+            ];
+
+            let gatewayUrl = null;
+            for (const gateway of gateways) {
+                if (!requiresOriginParam || gateway.supportsOrigin) {
+                    try {
+                        console.log(`Checking gateway: ${gateway.url}`);
+                        await fetch(gateway.url, { mode: 'no-cors' });
+                        console.log(`${gateway.url} - available`);
+                        gatewayUrl = gateway.url;
+                        break; // Exit loop once a responsive gateway is found
+                    } catch (error) {
+                        console.log(`${gateway.url} - not available`);
+                    }
+                }
+            }
+
+            if (!gatewayUrl) {
+                gatewayUrl = 'https://ipfs.io/ipfs/';
+                if (!requiresOriginParam || gateway.supportsOrigin) {
+                    gatewayUrl = 'https://dweb.link/ipfs/';
+                }
+            }
+
+
+            let redirectLink = `${gatewayUrl}${extractCID(currentUrl)}?redirectURL=${safeUrl}&autoadapt=${autoAdaptParam}&requiresorigin=${requiresOriginParam}&web3domain=${isWeb3DomainParam}&immediatecontinue${isimmediate}&magiclibraryconfirmation=${ismagic}`;
+
+            document.getElementById('output').innerText = redirectLink;
+            document.getElementById('copyButton').style.display = 'inline-block';
+        }
+
+
+
+
+
+
+        function copyToClipboard() {
+            let output = document.getElementById('output').innerText;
+            navigator.clipboard.writeText(output).then(() => {
+                alert('Redirect link copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+
+
+
+        const gateways = [
+            { url: 'https://ipfs.io/ipfs/', supportsOrigin: false },
+            { url: 'https://dweb.link/ipfs/', supportsOrigin: true },
+            { url: 'https://4everland.io/ipfs/', supportsOrigin: true },
+            { url: 'https://w3s.link/ipfs/', supportsOrigin: true }
+        ];
+
+        async function SetRedirectUrls(redirectURL) {
+
+            if (isWeb3Domain === true) {
+                let web3URL = '';
+                // Check if the redirectURL starts with "http", "https", or "/"
+                if (redirectURL.startsWith('http') || redirectURL.startsWith('https') || redirectURL.startsWith('/')) {
+                    web3URL = redirectURL;
+                } else {
+                    // If not, prepend "http://"
+                    web3URL = 'http://' + redirectURL;
+                }
+                console.log(`Redirect Link Set To: ${web3URL}`);
+
+                // Replace href with an event listener to fire ContinueRedirectWithLoader
+                document.getElementById('redirectLink').onclick = function () {
+                    ContinueRedirectWithLoader(web3URL);
+                };
+                document.getElementById('floatingRedirectButton').onclick = function () {
+                    ContinueRedirectWithLoader(web3URL);
+                };
+                return;
+            }
+
+
+
+            if (!autoAdaptLink) {
+                document.getElementById('redirectLink').onclick = function () {
+                    ContinueRedirectWithLoader(redirectURL);
+                };
+                document.getElementById('floatingRedirectButton').onclick = function () {
+                    ContinueRedirectWithLoader(redirectURL);
+                };
+                return;
+            }
+
+            let originalProtocol = '';
+            let modifiedURL = redirectURL;
+
+            // Check if the URL has a protocol
+            const protocolRegex = /^(https?:\/\/|ipfs:\/\/)/;
+            const match = redirectURL.match(protocolRegex);
+            if (match) {
+                originalProtocol = match[0];
+                modifiedURL = redirectURL.replace(protocolRegex, '');
+            } else {
+                // Assume it's an IPFS CID
+                modifiedURL = redirectURL;
+            }
+
+            const browserName = await getBrowserName();
+
+            // Define the list of backup gateways in the desired order
+            const gateways = [
+                { url: 'https://ipfs.io/ipfs/', supportsOrigin: false },
+                { url: 'https://dweb.link/ipfs/', supportsOrigin: true },
+                { url: 'https://4everland.io/ipfs/', supportsOrigin: true },
+                { url: 'https://w3s.link/ipfs/', supportsOrigin: true }
+            ];
+
+            console.log('The following error/s is to be expected. HTTP calls are simply verifying the links are still live.');
+            console.log(`Requires origin: ${requiresOrigin}`);
+            var gateChosen = false;
+            for (const gateway of gateways) {
+                if (requiresOrigin === true && gateway.supportsOrigin === false) {
+                    continue;
+                }
+
+                try {
+                    await fetch(gateway.url, { mode: 'no-cors' });
+                    console.log(`${gateway.url} - available`);
+                    modifiedURL = `${gateway.url}${modifiedURL}`;
+                    gateChosen = true;
+                    break; // Exit loop once a responsive gateway is found
+                } catch (error) {
+                    console.log(`${gateway.url} - not available`);
+                }
+            }
+
+            if (gateChosen === false) {
+                if (redirectURL.startsWith("/")) {
+                    modifiedURL = 'https://ipfs.io/ipfs' + redirectURL; // Concatenate without adding an extra slash
+                } else {
+                    modifiedURL = 'https://ipfs.io/ipfs/' + redirectURL; // Concatenate with the slash
+                }
+            }
+
+
+            console.log(`Redirect Link Set To: ${modifiedURL}`);
+            document.getElementById('redirectLink').onclick = function () {
+                ContinueRedirectWithLoader(modifiedURL);
+            };
+            document.getElementById('floatingRedirectButton').onclick = function () {
+                ContinueRedirectWithLoader(modifiedURL);
+            };
+            return modifiedURL;
+        }
+
+        function showLoader(redirectLink) {
+            // Create a container for the loader
+            let loaderContainer = document.createElement('div');
+            loaderContainer.id = 'fullPageLoader';
+            loaderContainer.style.position = 'fixed';
+            loaderContainer.style.top = '0';
+            loaderContainer.style.left = '0';
+            loaderContainer.style.width = '100%';
+            loaderContainer.style.height = '100%';
+            loaderContainer.style.backgroundColor = 'white';
+            loaderContainer.style.zIndex = '9999'; // High z-index to cover everything
+            loaderContainer.style.display = 'flex';
+            loaderContainer.style.justifyContent = 'center';
+            loaderContainer.style.alignItems = 'center';
+            loaderContainer.style.flexDirection = 'column';
+
+            // Create the loader spinner
+            let loader = document.createElement('div');
+            loader.style.border = '16px solid #f3f3f3';
+            loader.style.borderTop = '16px solid #3498db';
+            loader.style.borderRadius = '50%';
+            loader.style.width = '150px';
+            loader.style.height = '150px';
+            loader.style.animation = 'spin 2s linear infinite';
+
+            // Create the loader text
+            let loaderText = document.createElement('div');
+            loaderText.textContent = 'Loading...';
+            loaderText.style.fontSize = '36px';
+            loaderText.style.fontFamily = 'Arial, sans-serif';
+            loaderText.style.color = '#3498db';
+            loaderText.style.marginTop = '20px';
+
+            // Create the additional text
+            let additionalText = document.createElement('div');
+            additionalText.textContent = 'Taking a long time to load?';
+            additionalText.style.fontSize = '15px';
+            additionalText.style.fontFamily = 'Arial, sans-serif';
+            additionalText.style.color = 'black';
+            additionalText.style.marginTop = '10px';
+
+            // Create the clickable link
+            let redirectLinkElement = document.createElement('div');
+            redirectLinkElement.textContent = 'Click Here To Load Faster!';
+            redirectLinkElement.style.fontSize = '15px';
+            redirectLinkElement.style.fontFamily = 'Arial, sans-serif';
+            redirectLinkElement.style.color = '#3498db';
+            redirectLinkElement.style.marginTop = '5px';
+            redirectLinkElement.style.textDecoration = 'underline';
+            redirectLinkElement.style.cursor = 'pointer';
+
+            // Add click event listener to redirectLinkElement
+            redirectLinkElement.addEventListener('click', function () {
+                if (window.location.href === redirectLink) {
+                    // If the redirect link is the same as the current URL, reload the page
+                    window.location.reload();
+                } else {
+                    // Otherwise, redirect to the new URL
+                    window.location.href = redirectLink;
+                }
+            });
+
+            // Append the loader, text, additional text, and link to the container
+            loaderContainer.appendChild(loader);
+            loaderContainer.appendChild(loaderText);
+            loaderContainer.appendChild(additionalText);
+            loaderContainer.appendChild(redirectLinkElement);
+
+            // Append the container to the body
+            document.body.appendChild(loaderContainer);
+
+            // Add the keyframes for the spin animation
+            let styleSheet = document.createElement('style');
+            styleSheet.type = 'text/css';
+            styleSheet.innerText = `
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+`;
+            document.head.appendChild(styleSheet);
+        }
+
+
+        function loadIframeWithRetries(url) {
+            return new Promise((resolve, reject) => {
+                const maxRetries = 5;
+                let attempts = 0;
+                let iframe;
+                let timeoutId;
+                let retryTimeoutId;
+
+                function clearIFrame() {
+                    if (iframe) {
+                        iframe.remove();
+                        iframe = null;
+                    }
+                }
+
+                function startLoading() {
+                    clearIFrame(); // Clear any existing iframe
+                    iframe = document.createElement('iframe');
+                    iframe.id = 'siteReloader';
+                    iframe.src = url;
+                    document.body.appendChild(iframe);
+                    console.log('Attempting to load iframe, attempt:', attempts + 1);
+
+                    // Set a timeout to stop loading if no success message within 5 minutes
+                    timeoutId = setTimeout(() => {
+                        console.log('Loading timed out');
+                        handleRetry();
+                    }, 300000); // 5 minutes
+                }
+
+                function handleRetry() {
+                    clearIFrame();
+                    clearTimeout(timeoutId);
+                    attempts++;
+
+                    if (attempts < maxRetries) {
+                        retryTimeoutId = setTimeout(startLoading, 30000); // Retry after 2 minutes
+                    } else {
+                        console.log('Max retries reached. Stopping attempts.');
+                        reject('Failed to load iframe after 5 retries');
+                    }
+                }
+
+
+                window.addEventListener('message', (event) => {
+                    console.log(`Received message from ${event.origin}: ${event.data}`);
+
+                    // Since we're expecting 'iframeLoaded', ensure the message data matches
+                    if (event.data === 'iframeLoaded') {
+                        console.log('Iframe successfully loaded and confirmation received!');
+                        clearTimeout(timeoutId); // Clear the timeout since it's loaded
+                        clearTimeout(retryTimeoutId);
+                        resolve('Iframe loaded successfully');
+                    } else {
+                        console.log('Unexpected message received, ignoring.');
+                    }
+                });
+
+
+                startLoading();
+            });
+        }
+
+
+        async function ContinueRedirectWithLoader(sendRedirectLink) {
+            // Get the current full URL
+            let currentUrl = window.location.href;
+
+            // Check if "immediatecontinue=0" is in the URL
+            if (currentUrl.includes("immediatecontinue=1")) {
+                // Replace "immediatecontinue=0" with "immediatecontinue=1"
+                currentUrl = currentUrl.replace("immediatecontinue=1", "immediatecontinue=0");
+            }
+
+            // Call the showLoader method with the updated URL
+            showLoader(currentUrl);
+
+            if (currentUrl.includes("magiclibraryconfirmation=1")) {
+                await loadIframeWithRetries(sendRedirectLink);
+                console.log('loaded site retries are complete.');
+            }
+
+            // Add a 1-second delay, then redirect to the updated URL
+            setTimeout(function () {
+                window.location.href = sendRedirectLink;
+            }, 1000); // 1000 ms = 1 second
+        }
+
+
+
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            checkAutoAdaptParameter();
+            const params = getQueryParams();
+            const redirectButton = document.getElementById('floatingRedirectButton');
+
+            if (params.page) {
+                showPage(params.page);
+            } else if (params.redirectURL) {
+                const redirectURL = params.redirectURL;
+                var modifiedRedirectLink = await SetRedirectUrls(redirectURL);
+                showPage('redirect');
+                if (params.immediatecontinue == true) {
+                    await ContinueRedirectWithLoader(modifiedRedirectLink);
+                    return;
+                }
+
+            } else {
+                showPage('understanding_ipfs');
+            }
+
+            if (params.redirectURL && params.page !== 'redirect') {
+                await checkBrowserAndYear();  // Check browser and year before showing any sections
+                if (unsupportedBrowser === false) {
+                    redirectButton.style.display = 'inline-block';
+                }
+
+
+            }
+
+            // Hide warning message if the year is 2028 or later
+            const warningMessage = document.getElementById('warningMessage');
+            const currentYear = new Date().getFullYear();
+            if (currentYear >= 2028) {
+                warningMessage.style.display = 'none';
+            }
+
+            document.querySelectorAll('.menu a').forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    showPage(event.target.getAttribute('data-page'));
+                });
+            });
+
+        });
+
+        function togglePopup(popupId) {
+            const popup = document.getElementById(popupId);
+            const overlay = document.getElementById('overlay');
+            popup.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <div class="menu">
+        <a href="#" data-page="understanding_ipfs">What's IPFS</a>
+        <a href="#" data-page="browser_extensions">Browser Extension</a>
+        <a href="#" data-page="how_to_setup">How to Setup</a>
+        <a href="#" data-page="how_to_support">Support Project</a>
+        <a href="#" data-page="redirect_helper">Redirect Helper</a>
+        <a href="#" data-page="links_page">Links</a>
+        <a href="#" id="continueButton" style="display:none;">Continue To Site</a>
+    </div>
+
+    <div class="container page" id="links_page" style="display:none;">
+        <div class="mt-6 mb-12">
+            <div id="warningMessage" class="warning">
+                <h2>Important Notice</h2>
+                <p>Web3 domains may not be accessible on all browsers. We recommend using Brave browser or extension that supports the domain/s.</p>
+            </div>
+            <h1>Web3 Domains</h1>
+            <p>The <b><a href="http://ipfsredirect.unstoppable" target="_blank">latest version</a></b> of our site via Web3: IPFS-Redirect.unstoppable</p>
+            <p>If you prefer <b><a href="http://ipfsredirect-version.unstoppable" target="_blank">all versions</a></b> of the site: ipfsredirect-version.unstoppable</p>
+
+            <br />
+            <br />
+            <br />
+            <h1>Web2 Domains</h1>
+            <p>For open-source code, updates, and usage instructions, visit our <b><a href="https://github.com/magiccodingman/Ipfs-Redirect" target="_blank">GitHub repository</a></b></p>
+            <p>You can also access <b><a href="https://github.com/magiccodingman/MagicIpfsLoader" target="_blank">Magic IPFS Loader repository</a></b> to ensure reliable loading.</p>
+            
+
+        </div>
+    </div>
+
+    <div class="container page" id="understanding_ipfs" style="display:none;">
+        <div class="mt-6 mb-12">
+            <h1>What's IPFS</h1>
+            <p>The InterPlanetary File System (IPFS) is a peer-to-peer protocol designed to make the web faster, safer,
+                and more open. It enables the creation of distributed applications and makes the web more resilient
+                against server failures.</p>
+        </div>
+        <div class="mt-6 mb-12">
+            <h2>How It Works</h2>
+            <p>IPFS turns file storage into a decentralized process. Instead of fetching files from a single server,
+                IPFS retrieves pieces of files from multiple nodes. This is akin to how torrents work, but IPFS uses a
+                more sophisticated addressing system using content-addressing through a distributed hash table (DHT).
+            </p>
+        </div>
+        <div class="mt-6 mb-12">
+            <h2>Benefits</h2>
+            <ul style="margin-top:0px;">
+                <li><b>Decentralization</b>: Removes reliance on centralized servers and reduces the risk of server
+                    downtime affecting accessibility.</li>
+                <li><b>Efficiency</b>: Files are delivered faster because they are fetched from the nearest or most
+                    convenient nodes.</li>
+                <li><b>Reduced Redundancy</b>: Files are stored in multiple locations, which cuts down on wasted storage
+                    space.</li>
+                <li><b>Permanent Web</b>: Files are kept available as long as someone on the network is hosting them,
+                    reducing the issues of link rot and content disappearance.</li>
+            </ul>
+        </div>
+        <div class="mt-6 mb-12">
+            <h2>Why Use It?</h2>
+            <p>IPFS is useful for applications where high availability and decentralized storage are critical, such as
+                archiving important digital documents, serving large files, or creating decentralized applications. It's
+                decentralized nature also makes it an ideal candidate for preserving user privacy and security.</p>
+        </div>
+        <hr>
+        <div class="mt-6 mb-12">
+            <h2>Support IPFS Projects :)</h2>
+            <p>It's easy to support the projects you appreciate! It's simple, free, and only requires a few extra
+                clicks. Thank you!</p>
+            <a onclick="showPage('how_to_support')" class="button">Learn More</a>
+        </div>
+    </div>
+
+    <div class="container page" id="browser_extensions" style="display:none;">
+        <div class="mt-6 mb-12">
+            <h1>Browser Extension</h1>
+            <p>You can utilize IPFS easily on other browsers by using the provided browser extensions.</p>
+        </div>
+        <div class="mt-6 mb-12">
+            <h2>Step 1: Get IPFS App/Extension</h3>
+                <a class="button" href="https://docs.ipfs.tech/install/ipfs-companion/#prerequisites"
+                    target="_blank">Install IPFS Companion</a>
+        </div>
+        <div class="mt-6 mb-12">
+            <h2>Step 2: Set up IPFS app along with it (Optional - Highly Recommended)</h3>
+                <p><i>Note: It is highly recommended to set up the IPFS app along with the extension.</i></p>
+                <a onclick="showPage('how_to_setup')" class="button">Setup Guide</a>
+        </div>
+        <hr>
+        <div class="mt-6 mb-12">
+            <h2>Support IPFS Projects :)</h2>
+            <p>It's easy to support the projects you appreciate! It's simple, free, and only requires a few extra
+                clicks. Thank you!</p>
+            <a onclick="showPage('how_to_support')" class="button">Learn More</a>
+        </div>
+    </div>
+
+    <div class="container page" id="how_to_setup" style="display:none;">
+        <div class="mt-6 mb-12">
+            <h1>How to Setup IPFS App</h1>
+        </div>
+        <div class="mt-6 mb-12">
+            <h2>Step 1:</h3>
+                <a class="button" href="https://docs.ipfs.tech/install/ipfs-desktop/" target="_blank">Download IPFS
+                    App</a><b> (Required)</b>
+        </div>
+        <div class="mt-6 mb-12">
+            <h2>Step 2: (Optional)</h2>
+        </div>
+        <div class="mt-6 mb-12">
+            <h3>Port Forwarding</h2>
+                <p>Most users won't need to unless they're experiencing extremely slow IPFS speeds or errors. If you are
+                    experiencing issues, please refer to the official <a
+                        href="https://docs.ipfs.tech/how-to/nat-configuration/#configuration-options"
+                        target="_blank">Port Forwarding Guide</a>.</p>
+        </div>
+        <hr>
+        <div class="mt-6 mb-12">
+            <h2>Support IPFS Projects :)</h2>
+            <p>It's easy to support the projects you appreciate! It's simple, free, and only requires a few extra
+                clicks. Thank you!</p>
+            <a onclick="showPage('how_to_support')" class="button">Learn More</a>
+        </div>
+    </div>
+
+    <div class="container page" id="how_to_support" style="display:none;">
+        <div class="mt-6 mb-12">
+            <h1>How to Support IPFS Projects</h1>
+            <p>IPFS hosts content in a <b>decentralized</b> way, allowing the community to share hosting
+                responsibilities.</p>
+            <p>To contribute, you can "pin" content using its CID (Content Identifier):</p>
+            <ol>
+                <li>Copy the CID from the IPFS URL:
+                    <ul style="margin-top:0px;">
+                        <li class="disc"><b>Cloudflare:</b> http://cf-ipfs.com/ipfs/{CID}</li>
+                        <li class="disc"><b>IPNS.IO:</b> http://ipfs.io/ipfs/{CID}</li>
+                    </ul>
+                </li>
+                <li>Open your IPFS desktop application.</li>
+                <li>Click the "Explore" tab.</li>
+                <li>Paste the CID into the search bar and click "Browse".</li>
+                <li>Click the "More" button, then select "Set Pinning".</li>
+                <li>Check the box next to "Local Node" and click "Apply".</li>
+            </ol>
+            <p><span class="highlight">By pinning, you support the decentralized hosting of content, improving site
+                    speed, resilience, and contributing to the community.</span></p>
+        </div>
+    </div>
+
+
+    <div class="container page" id="redirect" style="display:none;">
+        <div class="mt-6 mb-12">
+            <h1>IPFS Website Access</h1>
+            <p><b>You're about to access an IPFS website.</b> <span class="highlight">The <b>Continue To Site</b> button
+                    will remain at the bottom right corner of the page throughout the site</span>.</p>
+        </div>
+
+        <div class="mt-6 mb-12">
+            <h1>How To Use</h1>
+            <p>Accessing IPFS content is simple and often works by default, but <b>IPFS can be very slow or not work
+                    properly without configuration!</b></p>
+        </div>
+
+        <div class="mt-6 mb-12" id="unsupportedBrowserSection" style="display:none;">
+            <h2>Unsupported Browser Detected:</h2>
+            <p>Until 2028 the Brave browser supports web3 domains. Please download Brave and revisit this link in the
+                Brave browser.</p>
+            <a href="https://brave.com/download/" class="button">Download Brave Browser</a>
+            <a href="#" onclick="continueAnyway()" class="button"
+                style="background-color: darkgray; color: white; margin-left: 10px;">I don't care, let me continue</a>
+        </div>
+
+        <div class="mt-6 mb-12" id="ipfsSetupSection">
+            <h2>I've Setup IPFS Extension:</h2>
+            <p>If you've set up IPFS or you're okay with slow loading click <b>Continue To Site</b> button.</p>
+            <a href="#" id="redirectLink" class="button">Continue To Site</a>
+        </div>
+        <div class="mt-6 mb-12" id="browserExtensionSection">
+            <h3>Use Browser Extension:</h3>
+            <p></p>
+            <p>Using the browser extension is the easiest method to utilize IPFS.</p>
+            <a onclick="showPage('browser_extensions')" class="button">Get Browser Extension</a>
+        </div>
+    </div>
+
+    <a href="#" id="floatingRedirectButton" class="button floating-button" style="display:none;">Continue To Site</a>
+
+    <div class="container page" id="redirect_helper" style="display:none;">
+        <div class="mt-6 mb-12">
+            <h1>IPFS Redirect Helper</h1>
+            <p>This is a community driven method to safely share IPFS links and promote wider adoption of IPFS. If you're using this for your own purposes, please consider pinning the CID of this
+                link to help support the project.</p>
+        </div>
+        <p>You can send this link without a redirect, or specify a default page using the ending parameter, <code>?page=how_to_support</code>. Page ID can be found in the HTML.</p>
+        <div class="mt-6 mb-12">
+            <p>Click <b><a onclick="showPage('links_page')">here</a></b> for the latest redirect CID if it changes.</p>
+        </div>
+
+
+        <div class="mt-6 mb-12">
+            <h2>URL Redirect Generator</h2>
+
+            <input type="checkbox" id="autoadaptlink" checked>
+            <label for="autoadaptlink"><b style="color: rgba(66, 66, 66, 1);">Auto Adapt Link</b></label>
+            <span class="info-circle" onclick="togglePopup('autoadaptlink-popup')">?</span>
+
+            <br />
+    
+            <input type="checkbox" id="requiresorigin">
+            <label for="requiresorigin"><b style="color: rgba(66, 66, 66, 1);">Requires Origin Isolation (subdomain gateway)</b></label>
+            <span class="info-circle" onclick="togglePopup('requiresorigin-popup')">?</span>
+
+            <br />
+
+            <input type="checkbox" id="web3Domain">
+            <label for="web3Domain"><b style="color: rgba(66, 66, 66, 1);">Web3/2 Domain</b></label>
+            <span class="info-circle" onclick="togglePopup('web3Domain-popup')">?</span>
+            
+            <br />
+
+            <input type="checkbox" id="immediateRedirectContinue">
+            <label for="immediateRedirectContinue"><b style="color: rgba(66, 66, 66, 1);">Immediate Redirect Continue</b></label>
+            <span class="info-circle" onclick="togglePopup('immediateRedirectContinue-popup')">?</span>
+
+            <br />
+
+            <input type="checkbox" id="magiclibraryconfirmationcheckbox">
+            <label for="magiclibraryconfirmationcheckbox"><b style="color: rgba(66, 66, 66, 1);">Redirect site has load confirmation or MagicIpfsLoader</b></label>
+            <span class="info-circle" onclick="togglePopup('magiclibraryconfirmationcheckbox-popup')">?</span>
+
+            <br />
+
+             <!-- Popups -->
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- Auto Adapt Link Popup -->
+    <div class="popup" id="autoadaptlink-popup">
+        <span class="close" onclick="togglePopup('autoadaptlink-popup')">&times;</span>
+        <h2>Auto Adapt Link</h2>
+        <p>When checked, this site will try to verify that public gateways are available before redirecting to a domain with your chosen CID. If not checked, the default behavior is:</p>
+        <ul>
+            <li>If "Requires Origin Isolation" is unchecked, it defaults to: <code>https://ipfs.io/ipfs/{CID}</code></li>
+            <li>If "Requires Origin Isolation" is checked, it defaults to: <code>https://dweb.link/ipfs/{CID}</code></li>
+        </ul>
+    </div>
+    
+    <!-- Requires Origin Isolation Popup -->
+    <div class="popup" id="requiresorigin-popup">
+        <span class="close" onclick="togglePopup('requiresorigin-popup')">&times;</span>
+        <h2>Requires Origin Isolation</h2>
+        <p>Origin Isolation ensures that the CID remains consistent when navigating between pages on the same site. Without it, using a gateway like <code>https://ipfs.io/ipfs/{CID}</code> might result in broken links or redirects if the URL changes.</p>
+        <p>For example, navigating from <code>https://ipfs.io/ipfs/{CID}</code> might result in the URL changing to <code>https://ipfs.io/Your_Page</code>, which loses the CID and breaks the link.</p>
+        <p>Using a gateway with Origin Isolation, like <code>dweb.link</code>, prevents this issue by ensuring the CID remains in the URL.</p>
+    </div>
+    
+    <!-- Web3/2 Domain Popup -->
+    <div class="popup" id="web3Domain-popup">
+        <span class="close" onclick="togglePopup('web3Domain-popup')">&times;</span>
+        <h2>Web3/2 Domain</h2>
+        <p>Check this box if you want to use a full URL (Web3 or Web2 domain) instead of a direct v1 CID in the redirect link. This allows you to include URLs with <code>http://</code> or <code>https://</code> or without them.</p>
+    </div>
+    
+    <!-- Immediate Redirect Continue Popup -->
+    <div class="popup" id="immediateRedirectContinue-popup">
+        <span class="close" onclick="togglePopup('immediateRedirectContinue-popup')">&times;</span>
+        <h2>Immediate Redirect Continue</h2>
+        <p>If checked, the redirect will immediately send the user to the site without showing a message about accessing an IPFS site. It will still apply the auto adapt link configuration, origin isolation, and/or Magic IPFS loader, but the user will not see the intermediate configuration screen. Instead, they will only see the loading screen.</p>
+    </div>
+
+            <div class="popup" id="magiclibraryconfirmationcheckbox-popup">
+                <span class="close" onclick="togglePopup('magiclibraryconfirmationcheckbox-popup')">&times;</span>
+                <h2>About Magic IPFS Loading Library</h2>
+                <p>This site utilizes the Magic IPFS Loader, which you can find more about here:
+                    <a href="https://github.com/magiccodingman/MagicIpfsLoader" target="_blank">Magic IPFS Loader on
+                        GitHub</a>.
+                </p>
+                <p>If the redirected-to site includes the script
+                    <code>window.parent.postMessage('iframeLoaded', '*');</code>
+                    or is using the Magic IPFS Loader, it will ensure that the site reliably loads by retrying multiple
+                    times
+                    until the public gateways find the CID and content.</p>
+                <p>If this feature is not implemented on the site being redirected to, the site will be loaded without
+                    retries. Therefore, if the site isn't found on the first attempt, it will fail to load.</p>
+                <p>For more information and updates, visit the GitHub repository:
+                    <a href="https://github.com/magiccodingman/Ipfs-Redirect" target="_blank">Ipfs-Redirect on
+                        GitHub</a>.
+                </p>
+            </div>
+
+            
+            <br />
+
+            <label for="urlInput"><b style="color: rgba(66, 66, 66, 1);">URL/IPFS CID v0</b> (we suggest CID v0)</label>
+            <input type="text" id="urlInput"
+                placeholder="Enter the CID (v0) or URL (specific URL's may lose the adapting capabilities)"
+                style="width: 100%; padding: 10px;">
+            <button class="button" onclick="generateRedirectLink()">Generate Link</button>
+
+            <div id="output"></div>
+            <button id="copyButton" onclick="copyToClipboard()">Copy</button>
+        </div>
+
+
+    </div>
+
+    <div class="container page" id="basic_setup" style="display:none;">
+        <div class="mt-6 mb-12">
+            <h1>IPFS Redirect Helper</h1>
+            <p>Anyone is more than welcome to utilize this redirect URL. It's a fantastic way to send IPFS links to
+                people in a safe manner, ensuring they know they'll be accessing IPFS. This tool will walk users through
+                setting up IPFS prior to redirecting them to the desired link. If they already have IPFS set up, it's
+                just one extra button click.</p>
+            <p>To use this link as your own redirect, use the current redirect link but add
+                <code>?redirectURL={Your_URL}</code> as a parameter at the end. Make sure to include the full link you
+                wish to send the user to and ensure the string is safe. You can use the string safety converter below to
+                safely convert any string you provide in a way that won't break the parameter when being used.
+            </p>
+        </div>
+        <div class="mt-6 mb-12">
+            <h2>String Safety Converter</h2>
+            <div style="padding-bottom:30px;">
+                <div style="padding-bottom:10px;">
+                    <input type="text" id="urlInput" placeholder="Enter the URL to redirect to"
+                        style="width: 100%; padding: 10px;">
+                </div>
+
+
+
+</body>
+<footer>
+
+
+</footer>
+
+</html>
