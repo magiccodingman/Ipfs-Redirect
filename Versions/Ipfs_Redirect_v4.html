@@ -510,10 +510,11 @@
                 document.getElementById('floatingRedirectButton').onclick = function () {
                     ContinueRedirectWithLoader(web3URL);
                 };
+                
                 return;
             }
 
-
+            
 
             if (!autoAdaptLink) {
                 document.getElementById('redirectLink').onclick = function () {
@@ -522,7 +523,6 @@
                 document.getElementById('floatingRedirectButton').onclick = function () {
                     ContinueRedirectWithLoader(redirectURL);
                 };
-                return;
             }
 
             let originalProtocol = '';
@@ -552,6 +552,9 @@
             console.log('The following error/s is to be expected. HTTP calls are simply verifying the links are still live.');
             console.log(`Requires origin: ${requiresOrigin}`);
             var gateChosen = false;
+
+            // auto adapting disabled for now.
+            /*
             for (const gateway of gateways) {
                 if (requiresOrigin === true && gateway.supportsOrigin === false) {
                     continue;
@@ -567,13 +570,25 @@
                     console.log(`${gateway.url} - not available`);
                 }
             }
+                */
 
             if (gateChosen === false) {
+                if (requiresOrigin === true)
+            {
+                if (redirectURL.startsWith("/")) {
+                    modifiedURL = 'https:/dweb.link/ipfs' + redirectURL; // Concatenate without adding an extra slash
+                } else {
+                    modifiedURL = 'https://dweb.link/ipfs/' + redirectURL; // Concatenate with the slash
+                }
+            }
+            else
+            {
                 if (redirectURL.startsWith("/")) {
                     modifiedURL = 'https://ipfs.io/ipfs' + redirectURL; // Concatenate without adding an extra slash
                 } else {
                     modifiedURL = 'https://ipfs.io/ipfs/' + redirectURL; // Concatenate with the slash
                 }
+            }
             }
 
 
@@ -771,7 +786,9 @@
                 showPage(params.page);
             } else if (params.redirectURL) {
                 const redirectURL = params.redirectURL;
+                
                 var modifiedRedirectLink = await SetRedirectUrls(redirectURL);
+                console.log(modifiedRedirectLink);
                 showPage('redirect');
                 if (params.immediatecontinue == true) {
                     await ContinueRedirectWithLoader(modifiedRedirectLink);
