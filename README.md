@@ -39,7 +39,7 @@ At all times, a **"Continue" button** will appear at the bottom-right corner of 
 
 Additionally, there's an option during this loading to **"Click here to load faster!"** which will guide users on how to set up IPFS via a desktop app or browser extension, before redirecting them back to the site.
 
-## Features
+
 ## Available Options
 
 ### Auto Adapt Link (Disabled in this version)
