@@ -53,6 +53,7 @@ Key features:
 - A **Continue to Site** button that follows the user across pages.
 - Automatic wrapping of the CID in an HTTPS gateway if the user hasn't set up IPFS.
 - Gateway redundancy to ensure reliability.
+- More! I just am too lazy right now to properly document.
 
 ## Supporting the Project
 
