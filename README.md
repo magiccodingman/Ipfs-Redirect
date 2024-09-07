@@ -96,12 +96,36 @@ If this option is not enabled, the user will see a brief message about using IPF
 
 *Checkbox*
 
-Enabling this option allows the site being redirected to use the `Magic IPFS Loader` or custom confirmation to ensure your site has been fully loaded.
+This feature ensures that the redirect process doesn't complete until the target site has fully loaded, preventing partial or failed loads, especially when using public IPFS gateways.
+
+#### How It Works
+
+When you enable this option, the Redirect Helper will look for a specific confirmation signal from the redirected-to site to verify that the site has successfully loaded. This confirmation is triggered by a line of JavaScript code that you need to add to the site being redirected to:
 
 If the destination site includes the script:
 ```js
 window.parent.postMessage('iframeLoaded', '*');
 ```
+
+The redirect helper loads your site within an iframe and monitors for this confirmation message. If the message is received, it signals that the site has fully loaded, and the user is then redirected to the site seamlessly. If the message isn't received within the 5-minute window, the iframe is removed, and the site reloads the iframe. This process is repeated every 5 minutes, forcing the IPFS public gateway to continue searching for your site until it's successfully found and loaded.
+
+#### Why It's Important
+
+- **Preventing Timeout Errors:** Without this feature, if the public IPFS gateway fails to locate your site within the 5-minute timeout period, the user will encounter a `500 Timeout Error`, which can be a frustrating dead-end experience. By reloading the iframe and continuing to search for the site, the redirect helper increases the likelihood that your site will eventually load, rather than timing out.
+  
+- **Ensuring Full Site Load:** In some cases, the initial load might bring up the `index.html` file, but crucial resources like CSS, JavaScript frameworks, or other dependencies might not have fully loaded. This can result in a broken or incomplete experience for users. By adding the confirmation code only after these critical files are loaded, you ensure that the redirect happens only when your site is fully functional. You can choose to trigger the confirmation message either as soon as `index.html` loads, or after specific critical resources (like your framework, bootstrap, or JavaScript) have successfully loaded.
+
+#### Integration with Magic IPFS Loader
+
+Currently, you need to manually add the confirmation code to the redirected site. However, in the near future, the **Magic IPFS Loader** will handle this automatically. Once integrated, you won't need to add any custom code—**Magic IPFS Loader** will automatically confirm that all critical resources (not just the `index.html`) have been successfully fetched before completing the redirect.
+
+This ensures that users don’t just see the site, but they interact with a fully loaded and functioning version of your IPFS site. The loader will retry fetching critical files until they are successfully retrieved, preventing incomplete site loads.
+
+> **Note:** Until the Magic IPFS Loader is fully released and integrated, it’s recommended to add the confirmation code manually to ensure optimal loading. Without this, the redirect helper won't know if your site has fully loaded and may cause premature redirection, leading to incomplete or broken user experiences.
+
+---
+
+By using the load confirmation feature, you ensure your users are taken to a fully functioning version of your site, without running into public gateway timeouts or missing critical files. This is especially useful in environments where public gateways might be slow or unreliable.
 
 ### Wiki Capabilities
 
