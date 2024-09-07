@@ -28,7 +28,7 @@ You can access the project via IPFS:
 
 The web2 link is the public gateway link to the web2 version which means you won't need Brave browser or extensions. But this is a static link, so you won't be able to see updates. This links to v4 updated on 9/6/24 but I'm not promising to update this link here reliably. Because I'll probably forget. Use the web3 domains for the newest versions.
 
-Youtube video how to use: [Youtube How to Guide](https://www.youtube.com/watch?v=a1QUnEpB83Y&t=4s)
+Youtube video how to use: [Youtube How to Guide](https://www.youtube.com/watch?v=a1QUnEpB83Y)
 
 The officially posted versions to the web3 domains. I do try to minify them before publishing. Which usually cuts roughly 30% off the size.
 
