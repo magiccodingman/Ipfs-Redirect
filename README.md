@@ -53,6 +53,8 @@ Key features:
 ## Supporting the Project
 
 Note that the site may load slowly due to limited hosting. Please consider supporting the project by pinning the CID on your IPFS node to improve speed and reliability.
+If you appreciate the project, a tip never hurts! Though a pinned CID is just as good ;)
+Bitcoin Address: 39oR7Drreu8Dxs2uN7uqWCXet3HkQhd4oS
 
 ## Conclusion
 
