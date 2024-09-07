@@ -21,9 +21,9 @@ Key features:
 I've been working on this with others in various forums, testing and refining it before making it publicly available. The project includes a small, 26 KB HTML file that acts as a redirect link and a helpful wiki on IPFS usage.
 
 You can access the project via IPFS:
-- [Web3 Domain](https://ipfs-redirect.unstoppable/)
-- [Web3 Domain Alternative](https://ipfsredirect.unstoppable/)
-- [Web3 Version Hosting](https://ipfsredirect-version.unstoppable/)
+- [Web3 Domain (ipfs-redirect.unstoppable)](https://ipfs-redirect.unstoppable/)
+- [Web3 Domain Alternative (ipfsredirect.unstoppable)](https://ipfsredirect.unstoppable/)
+- [Web3 Version Hosting (ipfsredirect-version.unstoppable)](https://ipfsredirect-version.unstoppable/)
 - [Web2 Domain](https://ipfs.io/ipfs/QmQonrckXZq37ZHDoRGN4xVBkqedvJRgYyzp2aBC5Ujpyp)
 
 The web2 link is the public gateway link to the web2 version which means you won't need Brave browser or extensions. But this is a static link, so you won't be able to see updates. This links to v4 updated on 9/6/24 but I'm not promising to update this link here reliably. Because I'll probably forget. Use the web3 domains for the newest versions.
