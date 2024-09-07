@@ -42,9 +42,9 @@ Additionally, there's an option during this loading to **"Click here to load fas
 
 ## Available Options
 
-### Auto Adapt Link (Disabled in this version)
+### Auto Adapt Link (Disabled in v4)
 
-*Checkbox (Currently Disabled)*
+*Checkbox*
 
 This feature attempts to verify that public gateways are available before redirecting. 
 
