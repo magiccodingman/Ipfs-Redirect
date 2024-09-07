@@ -6,6 +6,18 @@ Create your own IPFS redirect link to help others easily access your IPFS site!
 
 IPFS is a powerful tool for decentralized web hosting, but its adoption has been slow due to accessibility challenges. This project aims to simplify the process of sharing IPFS links by creating an easy-to-use redirect system.
 
+### How the Redirect Link Works
+
+The generated redirect link is connected to the original CID and customizes the instructions provided to the user. The goal is to be informative without being intrusive.
+
+Key features:
+- A **Continue to Site** button that follows the user across pages.
+- Automatic wrapping of the CID in an HTTPS gateway if the user hasn't set up IPFS.
+- Gateway redundancy to ensure reliability.
+- More! I just am too lazy right now to properly document.
+
+### Links, Guides, and Notes
+
 I've been working on this with others in various forums, testing and refining it before making it publicly available. The project includes a small, 26 KB HTML file that acts as a redirect link and a helpful wiki on IPFS usage.
 
 You can access the project via IPFS:
@@ -134,7 +146,7 @@ The main page includes:
 - A simple wiki with guides on using and setting up IPFS.
 - Best practices for supporting IPFS projects while managing bandwidth.
 
-### Redirect Creator
+### Redirect Helper
 
 Creating a redirect link is easy:
 1. Navigate to the **Redirect Helper** from the menu.
@@ -142,16 +154,6 @@ Creating a redirect link is easy:
 3. Click **Generate Link**.
 
 This will create a custom redirect URL that integrates your CID.
-
-### How the Redirect Link Works
-
-The generated redirect link is connected to the original CID and customizes the instructions provided to the user. The goal is to be informative without being intrusive.
-
-Key features:
-- A **Continue to Site** button that follows the user across pages.
-- Automatic wrapping of the CID in an HTTPS gateway if the user hasn't set up IPFS.
-- Gateway redundancy to ensure reliability.
-- More! I just am too lazy right now to properly document.
 
 ## Supporting the Project
 
