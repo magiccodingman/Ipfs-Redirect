@@ -11,6 +11,7 @@ I've been working on this with others in various forums, testing and refining it
 You can access the project via IPFS:
 - [Web3 Domain](https://ipfs-redirect.unstoppable/)
 - [Web3 Domain Alternative](https://ipfsredirect.unstoppable/)
+- [Web3 Version Hosting](https://ipfsredirect-version.unstoppable/)
 
 The officially posted versions to the web3 domains. I do try to minify them before publishing. Which usually cuts roughly 30% off the size.
 
