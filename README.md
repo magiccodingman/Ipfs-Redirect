@@ -12,6 +12,8 @@ You can access the project via IPFS:
 - [Web3 Domain](https://ipfs-redirect.unstoppable/)
 - [Web3 Domain Alternative](https://ipfsredirect.unstoppable/)
 - [Web3 Version Hosting](https://ipfsredirect-version.unstoppable/)
+- [Web2 Domain](https://ipfs.io/ipfs/QmctKY86RFsY896vW5aMo7agyRWJtetsrwSoqq39SsDZT3)
+This is the public gateway link to the web2 version which means you won't need Brave browser or extensions. But this is a static link, so you won't be able to see updates. This links to v4 updated on 9/6/24 but I'm not promising to update this link here reliably. Because I'll probably forget. Use the web3 domains for the newest versions.
 
 The officially posted versions to the web3 domains. I do try to minify them before publishing. Which usually cuts roughly 30% off the size.
 
