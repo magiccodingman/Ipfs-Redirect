@@ -30,8 +30,6 @@ The web2 link is the public gateway link to the web2 version which means you won
 
 Youtube video how to use: [Youtube How to Guide](https://www.youtube.com/watch?v=a1QUnEpB83Y)
 
-The officially posted versions to the web3 domains. I do try to minify them before publishing. Which usually cuts roughly 30% off the size.
-
 Additionally, when redirecting to web3 domains instead of a CID. The user will get a different screen if they use the link on any browser that's not Brave browser.
 
 **IMPORTANT NOTE***:
