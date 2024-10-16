@@ -21,16 +21,12 @@ Key features:
 I've been working on this with others in various forums, testing and refining it before making it publicly available. The project includes a small, 26 KB HTML file that acts as a redirect link and a helpful wiki on IPFS usage.
 
 You can access the project via IPFS:
-- [Web3 Domain (ipfs-redirect.unstoppable)](https://ipfs-redirect.unstoppable/)
-- [Web3 Domain Alternative (ipfsredirect.unstoppable)](https://ipfsredirect.unstoppable/)
-- [Web3 Version Hosting (ipfsredirect-version.unstoppable)](https://ipfsredirect-version.unstoppable/)
-- [Web2 Domain](https://ipfs.io/ipfs/QmQonrckXZq37ZHDoRGN4xVBkqedvJRgYyzp2aBC5Ujpyp)
-
-The web2 link is the public gateway link to the web2 version which means you won't need Brave browser or extensions. But this is a static link, so you won't be able to see updates. This links to v4 updated on 9/6/24 but I'm not promising to update this link here reliably. Because I'll probably forget. Use the web3 domains for the newest versions.
+- [Web3 Domain (ipfs-redirect.unstoppable)]([https://ipfs-redirect.unstoppable/](https://ipfs.io/ipfs/bafybeigegkxhaz7txa7lg5zaur3svwghdwkrcqvfnjpdg6ji5ldmuguoz4?redirectURL=ipfsredirect.unstoppable&autoadapt=0&requiresorigin=0&web3domain=1&immediatecontinue=1&magiclibraryconfirmation=0&resolveweb3domain=1))
 
 Youtube video how to use: [Youtube How to Guide](https://www.youtube.com/watch?v=a1QUnEpB83Y)
+Youtube video how to use (Web3 Resolving Feature Update): [Youtube How to Guide (Web3 Resolving)]([https://www.youtube.com/watch?v=a1QUnEpB83Y](https://www.youtube.com/watch?v=U_HAfjXbNNM))
 
-Additionally, when redirecting to web3 domains instead of a CID. The user will get a different screen if they use the link on any browser that's not Brave browser.
+Also you can go to my site at [magic coding man ipfs redirect link](https://magiccodingman.com/Ipfs-Redirect) to see an updated guide and article.
 
 **IMPORTANT NOTE***:
 Please always reference the Web3 domain created to see what the latest link and CID is. I'll update it over time to any new version. And if you choose to support the project, it'd incredibly appreciated if you keep track of the changes occassionally and pin the newest. Thank you!
