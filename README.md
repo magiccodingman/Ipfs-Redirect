@@ -21,7 +21,7 @@ Key features:
 I've been working on this with others in various forums, testing and refining it before making it publicly available. The project includes a small, 26 KB HTML file that acts as a redirect link and a helpful wiki on IPFS usage.
 
 You can access the project via IPFS:
-- [Web3 Domain (ipfs-redirect.unstoppable)]([https://ipfs-redirect.unstoppable/](https://ipfs.io/ipfs/bafybeigegkxhaz7txa7lg5zaur3svwghdwkrcqvfnjpdg6ji5ldmuguoz4?redirectURL=ipfsredirect.unstoppable&autoadapt=0&requiresorigin=0&web3domain=1&immediatecontinue=1&magiclibraryconfirmation=0&resolveweb3domain=1))
+- [Web3 Domain (ipfs-redirect.unstoppable)](https://ipfs.io/ipfs/QmbYXSYQpGHLGEkLFPPXeRmRoRB3hMKMwLrVJ8oG4z6Y7Y?redirectURL=ipfsredirect.unstoppable&autoadapt=0&requiresorigin=0&web3domain=1&immediatecontinue=1&magiclibraryconfirmation=0&resolveweb3domain=1)
 
 - [Web2 Domain (ipfsredirect.com)](http://ipfsredirect.com) - Use this to always resolve to the newest web3 domain! You're welcome!
 
