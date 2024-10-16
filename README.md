@@ -24,7 +24,8 @@ You can access the project via IPFS:
 - [Web3 Domain (ipfs-redirect.unstoppable)]([https://ipfs-redirect.unstoppable/](https://ipfs.io/ipfs/bafybeigegkxhaz7txa7lg5zaur3svwghdwkrcqvfnjpdg6ji5ldmuguoz4?redirectURL=ipfsredirect.unstoppable&autoadapt=0&requiresorigin=0&web3domain=1&immediatecontinue=1&magiclibraryconfirmation=0&resolveweb3domain=1))
 
 Youtube video how to use: [Youtube How to Guide](https://www.youtube.com/watch?v=a1QUnEpB83Y)
-Youtube video how to use (Web3 Resolving Feature Update): [Youtube How to Guide (Web3 Resolving)]([https://www.youtube.com/watch?v=a1QUnEpB83Y](https://www.youtube.com/watch?v=U_HAfjXbNNM))
+
+Youtube video how to use (Web3 Resolving Feature Update): [Youtube How to Guide (Web3 Resolving)](https://www.youtube.com/watch?v=U_HAfjXbNNM)
 
 Also you can go to my site at [magic coding man ipfs redirect link](https://magiccodingman.com/Ipfs-Redirect) to see an updated guide and article.
 
