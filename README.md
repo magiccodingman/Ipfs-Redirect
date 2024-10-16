@@ -87,6 +87,14 @@ Use this option to wrap your link using a full Web3 or Web2 domain. It allows UR
 
 ---
 
+### Auto Resolve Web3 Domain
+
+*Checkbox*
+
+Use this option to have IPFS Redirect automatically resolve a web3 domain on the users behalf. No extension or setup required! Note this currently works directly with the Polygon blockchain and Unstoppable Domains smart contract. This can be updated to utilize non Unstoppable domains in the future, but I have no interest in doing that as of right now. Not without further generated interest as I personally only use Unstoppable Domains.
+
+---
+
 ### Immediate Redirect Continue
 
 *Checkbox*
