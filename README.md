@@ -23,6 +23,8 @@ I've been working on this with others in various forums, testing and refining it
 You can access the project via IPFS:
 - [Web3 Domain (ipfs-redirect.unstoppable)]([https://ipfs-redirect.unstoppable/](https://ipfs.io/ipfs/bafybeigegkxhaz7txa7lg5zaur3svwghdwkrcqvfnjpdg6ji5ldmuguoz4?redirectURL=ipfsredirect.unstoppable&autoadapt=0&requiresorigin=0&web3domain=1&immediatecontinue=1&magiclibraryconfirmation=0&resolveweb3domain=1))
 
+- [Web2 Domain (ipfsredirect.com)](http://ipfsredirect.com) - Use this to always resolve to the newest web3 domain! You're welcome!
+
 Youtube video how to use: [Youtube How to Guide](https://www.youtube.com/watch?v=a1QUnEpB83Y)
 
 Youtube video how to use (Web3 Resolving Feature Update): [Youtube How to Guide (Web3 Resolving)](https://www.youtube.com/watch?v=U_HAfjXbNNM)
